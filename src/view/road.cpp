@@ -1,6 +1,7 @@
 #include "road.h"
 #include "../controller/controller.h"
 #include "render.h"
+#include "cars.h"
 
 void road::drawRoad(){
     //Road grey color
@@ -24,12 +25,16 @@ void road::drawRoad(){
     glColor3f(1.0, 1.0, 1.0);
     controller c;
     render r;
+    cars cr;
     if(c.getSpecial() != 0){
         r.setDistanceY(r.getDistanceY() - 0.01);
-        if(r.getDistanceX() < -0.4){
-            r.setScore(r.getScore()+1);
+        for(int i = 0; i < 4; i++){
+            cr.setyDist(cr.getyDist(i) - 0.01,i);
         }
-        //std::cout << score << " ";
+        if(r.getDistanceX() < -0.4){
+            r.setScore(r.getScore() + 9);
+        }
+        r.setScore(r.getScore() + 1);
     }
     for(float i = r.getDistanceY(); i <= 1.0; i += 0.1){
         drawLine(-0.3, i, 0.0, -0.3, i + 0.05, 0.0);

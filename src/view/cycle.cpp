@@ -3,14 +3,17 @@
 #include "../controller/controller.h"
 #include "dashboard.h"
 #include <stdio.h>
+#include "cars.h"
 
 void cycle::drawCycle(){
     glColor3f(0.5, 0.5, 0.5);
     controller c;
     render r;
+    cars cr;
     glRectf(r.getDistanceX() , -0.05, r.getDistanceX() + 0.05, 0.05);
-    if(checkLimit() == 0){
+    if(checkLimit() == 0 || cr.checkCarLimit()){
         writeToFile("scores.txt");
+        c.setGame(1);
         c.reset();
     }
 }
