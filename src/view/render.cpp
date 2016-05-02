@@ -3,12 +3,14 @@
 #include "dashboard.h"
 #include "road.h"
 #include "cycle.h"
+#include "cars.h"
 #include <stdio.h>
 
 void render::renderFunction(){
     dashboard d;
     controller c;
     render r;
+
     if(c.getPlay() == 0){
         d.drawDashboard();
     }
@@ -20,16 +22,16 @@ void render::playGame(){
     render r;
     road rd;
     cycle c;
+    cars cr;
+
     glClearColor(0.0, 0.5, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
-    //glLoadIdentity();
-    glColor3f(1.0, 0.0, 0.0);
-    rd.drawLine(-1.0, 0.0, 0.0, 1.0, 0.0, 0.0);
 
     rd.drawRoad();
 
     glLoadIdentity();
     c.drawCycle();
+    cr.drawCars();
 
     r.putScores();
 
@@ -72,4 +74,10 @@ int render::getScore(){
 }
 void render::setScore(int value){
     score = value;
+}
+int render::getLast(){
+    return last;
+}
+void render::setLast(int value){
+    last = value;
 }

@@ -1,10 +1,12 @@
 #include "dashboard.h"
 #include "render.h"
+#include "../controller/controller.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 void dashboard::drawDashboard(){
     render r;
+    controller c;
     glClearColor(0.0, 0.5, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -17,7 +19,12 @@ void dashboard::drawDashboard(){
     }
 
     glColor3f(1.0,1.0,1.0);
-    glRectf(-0.5, 0.7, 0.5, 0.9);
+    if(c.getGame() == 1){
+        glRectf(-0.5, 0.65, 0.5, 0.95);
+    }
+    else{
+        glRectf(-0.5, 0.7, 0.5, 0.9);
+    }
     glRectf(-0.5, -0.6, 0.5, 0.6);
     glRectf(-0.5, -0.9, 0.5, -0.7);
 
@@ -30,8 +37,18 @@ void dashboard::drawDashboard(){
         str[0] = '0';
         str[1] = '\0';
     }
-    r.drawBitmapText("High Score : ",-0.4,0.785,0.0);
-    r.drawBitmapText(str,0.05,0.783,0.0);
+    if(c.getGame() == 1){
+        r.drawBitmapText("Last Score : ",-0.4,0.825,0.0);
+        char st[30];
+        sprintf(st,"%d",r.getLast());
+        r.drawBitmapText(st,0.05,0.825,0.0);
+        r.drawBitmapText("High Score : ",-0.4,0.725,0.0);
+        r.drawBitmapText(str,0.05,0.725,0.0);
+    }
+    else{
+        r.drawBitmapText("High Score : ",-0.4,0.785,0.0);
+        r.drawBitmapText(str,0.05,0.785,0.0);
+    }
 
     r.drawBitmapText("Some Previous Scores : ",-0.4,0.5,0.0);
     for(int i = 0; i < size; i++){

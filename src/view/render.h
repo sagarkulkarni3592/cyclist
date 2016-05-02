@@ -3,7 +3,7 @@
 #include <iostream>
 
 static float distanceX = -0.45, distanceY = -1.0;
-static int score = 0;
+static int score = 0, last = 0;
 class render{
     public:
         static void renderFunction();
@@ -16,4 +16,6 @@ class render{
         void setScore(int);
         void putScores();
         void playGame();
+        int getLast();
+        void setLast(int);
 };
